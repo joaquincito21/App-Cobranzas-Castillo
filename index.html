@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Castillo — Documentos Jurídicos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f1923;--gold:#b8922a;--parch:#f7f2e8;--line:#d6c9a8;--muted:#7a6f5e;--white:#fff;--green:#2a5c3f;--red:#7a2020;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);font-family:'Jost',sans-serif;min-height:100vh;background-image:radial-gradient(ellipse 60% 40% at 10% 0%,rgba(184,146,42,.09) 0%,transparent 70%);}
+header{display:flex;align-items:center;gap:18px;padding:22px 36px;border-bottom:1px solid rgba(184,146,42,.25);}
+.crest{width:48px;height:48px;flex-shrink:0;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--gold);}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--parch);}
+.hdr p{font-size:.68rem;letter-spacing:2.8px;text-transform:uppercase;color:var(--gold);font-weight:400;margin-top:2px;}
+.wrap{max-width:880px;margin:0 auto;padding:34px 20px 90px;}
+.tabs{display:flex;}
+.tab{flex:1;padding:13px 10px;background:rgba(15,25,35,.8);border:1px solid rgba(184,146,42,.2);color:var(--muted);font-family:'Jost',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .18s;}
+.tab:first-child{border-radius:8px 0 0 0;}.tab:last-child{border-radius:0 8px 0 0;border-left:none;}
+.tab:hover:not(.on){background:rgba(184,146,42,.07);color:var(--parch);}
+.tab.on{background:var(--parch);color:var(--ink);border-color:var(--gold);border-bottom-color:var(--parch);font-weight:700;}
+.card{background:var(--parch);border:1px solid var(--gold);border-top:none;border-radius:0 0 14px 14px;padding:36px 38px 42px;display:none;}
+.card.on{display:block;}
+.card-ttl{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.card-sub{color:var(--muted);font-size:.83rem;font-weight:300;margin-bottom:28px;}
+.sec{font-size:.63rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--gold);margin:24px 0 13px;padding-bottom:7px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sec:first-of-type{margin-top:0;}
+.sn{width:17px;height:17px;border-radius:50%;background:var(--ink);color:var(--gold);font-size:.58rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+.f{display:flex;flex-direction:column;gap:5px;}
+label{font-size:.74rem;font-weight:600;color:var(--ink);}
+.hint{font-size:.67rem;color:var(--muted);margin-top:1px;}
+input{border:1.5px solid var(--line);background:var(--white);border-radius:7px;padding:9px 12px;font-family:'Jost',sans-serif;font-size:.91rem;color:var(--ink);transition:border-color .15s,box-shadow .15s;outline:none;width:100%;}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,146,42,.13);}
+input::placeholder{color:#c4b896;font-weight:300;}
+.pct-group{display:flex;gap:0;border-radius:7px;overflow:hidden;border:1.5px solid var(--line);}
+.pct-btn{flex:1;padding:9px 6px;background:var(--white);border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:500;color:var(--muted);transition:all .15s;text-align:center;}
+.pct-btn:not(:last-child){border-right:1px solid var(--line);}
+.pct-btn.on{background:var(--ink);color:var(--gold);font-weight:700;}
+.pct-btn:hover:not(.on){background:rgba(184,146,42,.08);color:var(--ink);}
+.prev{background:#fffbef;border:1px solid rgba(184,146,42,.4);border-radius:7px;padding:11px 15px;margin-top:9px;font-size:.79rem;color:var(--ink);line-height:1.75;min-height:38px;}
+.prev b{color:var(--gold);}
+.btn-gen{margin-top:32px;width:100%;padding:15px;background:var(--ink);color:var(--gold);border:2px solid var(--gold);border-radius:9px;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:11px;}
+.btn-gen:hover{background:var(--gold);color:var(--ink);}.btn-gen:active{transform:scale(.99);}
+.btn-gen svg{width:16px;height:16px;}
+.msg-err{display:none;margin-top:11px;background:rgba(122,32,32,.08);border:1px solid rgba(122,32,32,.3);border-radius:7px;padding:10px 14px;color:var(--red);font-size:.82rem;}
+.msg-err.on{display:block;}
+.msg-ok{display:none;margin-top:14px;background:rgba(42,92,63,.1);border:1px solid rgba(42,92,63,.35);border-radius:8px;padding:13px 17px;color:var(--green);font-size:.85rem;font-weight:500;align-items:center;gap:9px;}
+.msg-ok.on{display:flex;}
+.msg-ok svg{width:17px;height:17px;flex-shrink:0;}
+.dl-manual{display:none;margin-top:14px;text-align:center;}
+.dl-manual.on{display:block;}
+.dl-manual a{display:inline-flex;align-items:center;gap:9px;padding:13px 28px;background:var(--green);color:#fff;border-radius:8px;text-decoration:none;font-size:.83rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:opacity .15s;}
+.dl-manual a:hover{opacity:.88;}
+.dl-manual a svg{width:16px;height:16px;}
+@media(max-width:600px){.g2,.g3{grid-template-columns:1fr;}.card{padding:22px 18px 30px;}header{padding:16px 18px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crest">C</div>
+  <div class="hdr">
+    <h1>Castillo S.A.C.I.F.I.A.</h1>
+    <p>Generador de Documentos Jurídicos</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab on" onclick="setTab('t3',this)">Reconocimiento — Terceros</button>
+    <button class="tab"    onclick="setTab('ti',this)">Reconocimiento — Titular</button>
+  </div>
+
+  <!-- TERCEROS -->
+  <div class="card on" id="card-t3">
+    <div class="card-ttl">Reconocimiento de Deuda — Tercero</div>
+    <div class="card-sub">El tercero se constituye en garante liso y llano, principal pagador y deudor solidario sin beneficio de excusión.</div>
+
+    <div class="sec"><span class="sn">1</span>Datos del Tercero (quien reconoce la deuda)</div>
+    <div class="g2">
+      <div class="f"><label>Apellido y nombre del Tercero</label><input id="t3_tn" placeholder="CORTEZ MAXIMILIANO JUAN" oninput="mayus(this)"></div>
+      <div class="f"><label>DNI del Tercero</label><input id="t3_td" placeholder="44.719.680"></div>
+    </div>
+
+    <div class="sec"><span class="sn">2</span>Datos del Titular / Deudor Principal</div>
+    <div class="g3">
+      <div class="f"><label>Apellido y nombre del Titular</label><input id="t3_tin" placeholder="CHUMBITA JORGE JUAN" oninput="mayus(this)"></div>
+      <div class="f"><label>DNI del Titular</label><input id="t3_tid" placeholder="10.781.619"></div>
+      <div class="f"><label>N° de Cuenta del Titular</label><input id="t3_tic" placeholder="10781619/0"></div>
+    </div>
+
+    <div class="sec"><span class="sn">3</span>Monto Total de la Deuda</div>
+    <div class="g2">
+      <div class="f">
+        <label>Capital a favor de Castillo ($)</label>
+        <input id="t3_mc" placeholder="4.552.092,28" oninput="prev('t3')">
+        <div class="hint">Formato argentino · Ej: 4.552.092,28</div>
+      </div>
+      <div class="f"><label>Honorarios profesionales ($)</label><input id="t3_mh" placeholder="0,00" oninput="prev('t3')"></div>
+    </div>
+    <div class="prev" id="t3_prev">Completá los montos para ver el total en letras.</div>
+
+    <div class="sec"><span class="sn">4</span>Anticipo</div>
+    <div class="g2">
+      <div class="f"><label>Monto anticipo a favor de Castillo ($)</label><input id="t3_an" placeholder="316.117,52"></div>
+      <div class="f"><label>Honorarios del anticipo ($)</label><input id="t3_ah" placeholder="63.223,50"></div>
+    </div>
+
+    <div class="sec"><span class="sn">5</span>Plan de cuotas</div>
+    <div class="g3">
+      <div class="f"><label>Cantidad de cuotas</label><input id="t3_nc" type="number" min="1" placeholder="11"></div>
+      <div class="f"><label>Monto por cuota ($)</label><input id="t3_qm" placeholder="316.117,52"></div>
+      <div class="f"><label>Honorarios por cuota ($)</label><input id="t3_qh" placeholder="63.223,50"></div>
+    </div>
+    <div style="margin-top:12px" class="f"><label>Fecha del primer vencimiento</label><input id="t3_vc" type="date"></div>
+
+    <div class="sec"><span class="sn">6</span>Porcentaje de honorarios profesionales</div>
+    <div class="f">
+      <label>Porcentaje aplicable</label>
+      <div class="pct-group">
+        <button class="pct-btn on" onclick="setPct('t3','20%',this)">20%</button>
+        <button class="pct-btn"    onclick="setPct('t3','24%',this)">24%</button>
+      </div>
+      <div class="hint">Solo afecta el texto del documento.</div>
+    </div>
+
+    <div class="sec"><span class="sn">7</span>Fecha del documento</div>
+    <div class="g3">
+      <div class="f"><label>Día</label><input id="t3_fd" type="number" min="1" max="31" placeholder="30"></div>
+      <div class="f"><label>Mes (en palabras)</label><input id="t3_fm" placeholder="ENERO" oninput="mayus(this)"></div>
+      <div class="f"><label>Año</label><input id="t3_fa" type="number" placeholder="2026"></div>
+    </div>
+
+    <button class="btn-gen" onclick="generar('t3')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+      Generar y descargar documento Word
+    </button>
+    <div class="msg-err" id="err-t3"></div>
+    <div class="msg-ok" id="ok-t3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Documento generado y descargado correctamente.</div>
+    <div class="dl-manual" id="dl-t3"><a id="dl-t3-a" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descargar documento</a></div>
+  </div>
+
+  <!-- TITULAR -->
+  <div class="card" id="card-ti">
+    <div class="card-ttl">Reconocimiento de Deuda — Titular</div>
+    <div class="card-sub">El titular reconoce la deuda en su propio nombre como deudor principal.</div>
+
+    <div class="sec"><span class="sn">1</span>Datos del Titular</div>
+    <div class="g3">
+      <div class="f"><label>Apellido y nombre del Titular</label><input id="ti_tn" placeholder="PASTRAN VALERIA VANESA" oninput="mayus(this)"></div>
+      <div class="f"><label>DNI del Titular</label><input id="ti_td" placeholder="33.044.563"></div>
+      <div class="f"><label>N° de Cuenta</label><input id="ti_tc" placeholder="33044563/0"></div>
+    </div>
+
+    <div class="sec"><span class="sn">2</span>Monto Total de la Deuda</div>
+    <div class="g2">
+      <div class="f">
+        <label>Capital a favor de Castillo ($)</label>
+        <input id="ti_mc" placeholder="774.314,96" oninput="prev('ti')">
+        <div class="hint">Formato argentino · Ej: 774.314,96</div>
+      </div>
+      <div class="f"><label>Honorarios profesionales ($)</label><input id="ti_mh" placeholder="0,00" oninput="prev('ti')"></div>
+    </div>
+    <div class="prev" id="ti_prev">Completá los montos para ver el total en letras.</div>
+
+    <div class="sec"><span class="sn">3</span>Anticipo</div>
+    <div class="g2">
+      <div class="f"><label>Monto anticipo a favor de Castillo ($)</label><input id="ti_an" placeholder="71.695,83"></div>
+      <div class="f"><label>Honorarios del anticipo ($)</label><input id="ti_ah" placeholder="14.339,16"></div>
+    </div>
+
+    <div class="sec"><span class="sn">4</span>Plan de cuotas</div>
+    <div class="g3">
+      <div class="f"><label>Cantidad de cuotas</label><input id="ti_nc" type="number" min="1" placeholder="8"></div>
+      <div class="f"><label>Monto por cuota ($)</label><input id="ti_qm" placeholder="71.695,83"></div>
+      <div class="f"><label>Honorarios por cuota ($)</label><input id="ti_qh" placeholder="14.339,16"></div>
+    </div>
+    <div style="margin-top:12px" class="f"><label>Fecha del primer vencimiento</label><input id="ti_vc" type="date"></div>
+
+    <div class="sec"><span class="sn">5</span>Porcentaje de honorarios profesionales</div>
+    <div class="f">
+      <label>Porcentaje aplicable</label>
+      <div class="pct-group">
+        <button class="pct-btn on" onclick="setPct('ti','20%',this)">20%</button>
+        <button class="pct-btn"    onclick="setPct('ti','24%',this)">24%</button>
+      </div>
+      <div class="hint">Solo afecta el texto del documento.</div>
+    </div>
+
+    <div class="sec"><span class="sn">6</span>Fecha del documento</div>
+    <div class="g3">
+      <div class="f"><label>Día</label><input id="ti_fd" type="number" min="1" max="31" placeholder="01"></div>
+      <div class="f"><label>Mes (en palabras)</label><input id="ti_fm" placeholder="DICIEMBRE" oninput="mayus(this)"></div>
+      <div class="f"><label>Año</label><input id="ti_fa" type="number" placeholder="2025"></div>
+    </div>
+
+    <button class="btn-gen" onclick="generar('ti')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+      Generar y descargar documento Word
+    </button>
+    <div class="msg-err" id="err-ti"></div>
+    <div class="msg-ok" id="ok-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Documento generado y descargado correctamente.</div>
+    <div class="dl-manual" id="dl-ti"><a id="dl-ti-a" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descargar documento</a></div>
+  </div>
+</div>
+
+<script>
+const pctVal = {t3:'20%', ti:'20%'};
+function setTab(id,el){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.card').forEach(c=>c.classList.remove('on'));el.classList.add('on');document.getElementById('card-'+id).classList.add('on');}
+function mayus(el){el.value=el.value.toUpperCase();}
+function g(id){return document.getElementById(id).value.trim();}
+function setPct(p,val,btn){pctVal[p]=val;btn.closest('.pct-group').querySelectorAll('.pct-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+
+// Parseo formato argentino: 100.000,50 → 100000.50
+function pm(s){
+  s=(s||'').trim();
+  if(!s)return 0;
+  if(s.indexOf(',')!==-1){s=s.replace(/\./g,'').replace(',','.');}
+  return parseFloat(s)||0;
+}
+function fmtDate(s){if(!s)return'';const[y,m,d]=s.split('-');return d+'/'+m+'/'+y;}
+function fmtAR(n){const f=parseFloat(n).toFixed(2);const[i,d]=f.split('.');return'$'+i.replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+d;}
+
+// Número a letras — 21-29 como palabras compuestas
+const UN=['','UN','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE','DIEZ','ONCE','DOCE','TRECE','CATORCE','QUINCE','DIECISÉIS','DIECISIETE','DIECIOCHO','DIECINUEVE','VEINTE','VEINTIÚN','VEINTIDÓS','VEINTITRÉS','VEINTICUATRO','VEINTICINCO','VEINTISÉIS','VEINTISIETE','VEINTIOCHO','VEINTINUEVE'];
+const DC=['','','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
+const CN=['','CIENTO','DOSCIENTOS','TRESCIENTOS','CUATROCIENTOS','QUINIENTOS','SEISCIENTOS','SETECIENTOS','OCHOCIENTOS','NOVECIENTOS'];
+function eW(n){if(n===0)return'CERO';let r='';if(n>=1000000){const m=Math.floor(n/1000000);r+=(m===1?'UN MILLÓN':eW(m)+' MILLONES')+' ';n%=1000000;}if(n>=1000){const k=Math.floor(n/1000);r+=(k===1?'MIL':eW(k)+' MIL')+' ';n%=1000;}if(n>=100){r+=(n===100?'CIEN':CN[Math.floor(n/100)])+' ';n%=100;}if(n>=30){const d=DC[Math.floor(n/10)];const u=n%10;r+=(u?d+' Y '+UN[u]:d)+' ';}else if(n>0){r+=UN[n]+' ';}return r.trim();}
+function ctvW(c){if(c===0)return'00/100';if(c<=29)return UN[c];const d=DC[Math.floor(c/10)];const u=c%10;return u?d+' Y '+UN[u]:d;}
+function toLetras(monto){const s=parseFloat(monto).toFixed(2);const[ip,dp]=s.split('.');const e=parseInt(ip,10);const c=parseInt(dp,10);if(c===0)return eW(e)+' CON 00/100';return eW(e)+' CON '+ctvW(c)+' CTVS.';}
+
+function prev(p){
+  const tot=pm(g(p+'_mc'))+pm(g(p+'_mh'));
+  const el=document.getElementById(p+'_prev');
+  if(tot>0)el.innerHTML='<b>Total:</b> PESOS '+toLetras(tot)+' &nbsp;·&nbsp; <b>'+fmtAR(tot)+'</b>';
+  else el.textContent='Completá los montos para ver el total en letras.';
+}
+
+// RTF helpers
+const RC={'á':"\\\'e1",'é':"\\\'e9",'í':"\\\'ed",'ó':"\\\'f3",'ú':"\\\'fa",'Á':"\\\'c1",'É':"\\\'c9",'Í':"\\\'cd",'Ó':"\\\'d3",'Ú':"\\\'da",'ñ':"\\\'f1",'Ñ':"\\\'d1",'ü':"\\\'fc",'Ü':"\\\'dc",'\u00b0':"\\\'b0",'\u00ba':"\\\'ba",'\u201c':'\\ldblquote ','\u201d':'\\rdblquote ','\u2014':'\\emdash ','\u00a0':' '};
+function esc(s){let o='';for(const c of s){if(RC[c])o+=RC[c];else if(c.charCodeAt(0)>127)o+='\\u'+c.charCodeAt(0)+'?';else o+=c;}return o;}
+
+// rP: párrafo simple
+function rP(t,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||22);const sa='\\sa'+(o.sa!==undefined?o.sa:120);const bf=o.bold?'\\b ':'';const bfe=o.bold?'\\b0 ':'';return'{\\pard'+al+sa+'\\f0'+sz+' '+bf+esc(t)+bfe+'\\par}\n';}
+
+// rPM: párrafo con negritas selectivas — parts:[{t,bold}]
+function rPM(parts,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||22);const sa='\\sa'+(o.sa!==undefined?o.sa:120);let c='';for(const p of parts){if(p.bold)c+='{\\b '+esc(p.t)+'\\b0}';else c+=esc(p.t);}return'{\\pard'+al+sa+'\\f0'+sz+' '+c+'\\par}\n';}
+
+function rFirmas(){return rP('')+rP('Firma:   _______________________',{sa:200})+rP('')+rP('Aclaración:   _______________________',{sa:200})+rP('')+rP('DNI:   _______________________',{sa:200});}
+function wrapRTF(b){return'{\\rtf1\\ansi\\ansicpg1252\\deff0\n{\\fonttbl{\\f0\\froman\\fcharset0 Arial;}}\n{\\colortbl;}\n\\widowctrl\\wpaper15840\\wpaperh12240\\margl1800\\margr1440\\margt1440\\margb1440\n'+b+'\n}';}
+
+// ══ TITULAR — negritas según doc PASTRAN ══
+// Bold: nombre+DNI, N°cuenta, Castillo S.A.C.I.F.I.A, monto total,
+//       ANTICIPO, montos anticipo, cuotas, montos cuota, fecha doc
+function docTitular(D){
+  const total=pm(D.mc)+pm(D.mh);
+  const pct=D.pct;
+  const ct=parseInt(D.nc)===1?'cuota':'cuotas iguales, mensuales y consecutivas';
+  let b='';
+  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:26,sa:40});
+  b+=rP('(TITULAR - SUCURSAL)',{center:true,bold:true,size:22,sa:200});
+  b+=rPM([
+    {t:D.tn+', DNI N\u00b0 '+D.td+',',bold:true},
+    {t:' en mi car\u00e1cter de Titular de la cuenta N\u00b0 '},
+    {t:D.tc,bold:true},
+    {t:' reconozco adeudar a la empresa '},
+    {t:'Castillo S.A.C.I.F.I.A',bold:true},
+    {t:' la suma de '},
+    {t:'PESOS '+toLetras(total)+' ('+fmtAR(total)+')',bold:true},
+    {t:' en adelante \u201cLA DEUDA\u201d, en concepto de TODAS LAS FACTURAS.'},
+  ]);
+  b+=rP('Acepto la capitalizaci\u00f3n al d\u00eda de la fecha del importe consignado y que el presente no constituye novaci\u00f3n en los t\u00e9rminos del art. 933 y concordantes del C\u00f3digo Civil y Comercial de la Naci\u00f3n.');
+  b+=rP('Me comprometo a abonar LA DEUDA de la siguiente manera:');
+  b+=rPM([
+    {t:'Entrega en concepto de '},
+    {t:'ANTICIPO',bold:true},
+    {t:' en el d\u00eda de la fecha de '},
+    {t:'PESOS '+toLetras(pm(D.an))+' ('+fmtAR(pm(D.an))+')',bold:true},
+    {t:' a favor de Castillo S.A.C.I.F.I.A. En el mismo acto abon\u00f3 la suma de '},
+    {t:'PESOS '+toLetras(pm(D.ah))+' ('+fmtAR(pm(D.ah))+')',bold:true},
+    {t:', correspondiente al '+pct+' de honorarios profesionales.'},
+  ]);
+  b+=rPM([
+    {t:'El saldo deber\u00e1 abonarse en '+D.nc+' '},
+    {t:ct,bold:true},
+    {t:' de '},
+    {t:'PESOS '+toLetras(pm(D.qm))+' ('+fmtAR(pm(D.qm))+') cada',bold:true},
+    {t:' una de ellas a favor de Castillo S.a.c.i.f.i.a, venciendo la primera el d\u00eda '+D.vc+' y las subsiguientes en igual d\u00eda de los meses sucesivos. Con el pago de cada cuota pactada en el presente abonar\u00e9 el importe '},
+    {t:'PESOS '+toLetras(pm(D.qh))+' ('+fmtAR(pm(D.qh))+')',bold:true},
+    {t:', correspondiente a honorarios profesionales.'},
+  ]);
+  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de COPIAP\u00d3 N\u00b0 235, LOCAL 5, PLANTA BAJA de la Ciudad de La Rioja, Argentina.');
+  b+=rP('En garant\u00eda del presente acuerdo, suscribo un pagar\u00e9 a la vista a favor de Castillo S.a.c.i.f.i.a por el importe reconocido, el que me ser\u00e1 restituido una vez cancelada la forma de pago indicada en los puntos a) y b), m\u00e1s la presentaci\u00f3n de cada uno de los recibos emitidos a su favor.');
+  b+=rP('Para el caso que no abone en los plazos descriptos alguna de las cuotas pactadas, incurrir\u00e9 en mora de pleno derecho sin necesidad de interpelaci\u00f3n judicial o extrajudicial alguna y caer\u00e1n todos los plazos torn\u00e1ndose exigible la totalidad del capital no amortizado, como si la obligaci\u00f3n fuere de plazo vencido, con m\u00e1s los intereses compensatorios devengados desde la fecha de mora y hasta su efectivo pago. Asimismo, en caso de mora abonar\u00e9 un inter\u00e9s punitorio equivalente al 50% (cincuenta por ciento) de la tasa de inter\u00e9s compensatorio establecido, desde la fecha de mora y hasta su efectivo pago.');
+  b+=rPM([
+    {t:'En la ciudad de LA RIOJA, a los '},
+    {t:D.fd+' d\u00edas del mes de '+D.fm+' de '+D.fa,bold:true},
+    {t:', se firman dos ejemplares del presente, de plena conformidad.'},
+  ]);
+  b+=rFirmas();
+  return wrapRTF(b);
+}
+
+// ══ TERCEROS — negritas según doc CHUMBITA ══
+// Bold: subtítulo (ya en rP bold), nombre+DNI del tercero
+function docTerceros(D){
+  const total=pm(D.mc)+pm(D.mh);
+  const ct=parseInt(D.nc)===1?'cuota':'cuotas iguales, mensuales y consecutivas';
+  let b='';
+  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:26,sa:40});
+  b+=rP('(TERCEROS - SUCURSAL)',{center:true,bold:true,size:22,sa:200});
+  b+=rPM([
+    {t:D.tn+', DNI '+D.td+',',bold:true},
+    {t:' por la presente que me constituyo en garante liso y llano,\u00a0principal pagador, y deudor solidario,\u00a0sin beneficio de excusi\u00f3n\u00a0del Sr./a '+D.tin+' argentino/a,\u00a0mayor de edad, DNI N\u00b0 '+D.tid+' por las operaciones de cr\u00e9ditos realizadas en CASTILLO S.A.C.I.F.I.A., por\u00a0capital, con mas sus intereses,\u00a0gastos y/o cualquier otra causa derivada de la obligaci\u00f3n principal que se adeude a CASTILLO S.A.C.I.F.I.A.'},
+  ]);
+  b+=rP('En virtud a ello reconozco adeudar la suma de Pesos '+toLetras(total)+' ('+fmtAR(total)+'), en adelante \u201cLA DEUDA\u201d, en concepto de TODAS LAS FACTURAS.');
+  b+=rP('Acepto la capitalizaci\u00f3n al d\u00eda de la fecha del importe consignado y que el presente no constituye novaci\u00f3n en los t\u00e9rminos del art. 933 y concordantes del C\u00f3digo Civil y Comercial de la Naci\u00f3n.');
+  b+=rP('Me comprometo a abonar LA DEUDA de la siguiente manera:');
+  b+=rP('Entrega en este acto en concepto de anticipo en el d\u00eda de la fecha la suma de Pesos '+toLetras(pm(D.an))+' ('+fmtAR(pm(D.an))+') a favor de CASTILLO S.A.C.I.F.I.A, m\u00e1s la suma de PESOS '+toLetras(pm(D.ah))+' ('+fmtAR(pm(D.ah))+') en concepto de honorarios profesionales.');
+  b+=rP('El saldo deber\u00e1 abonarse en '+D.nc+' '+ct+' de Pesos '+toLetras(pm(D.qm))+' ('+fmtAR(pm(D.qm))+'), venciendo la primera de ellas el d\u00eda '+D.vc+' y las subsiguientes en igual d\u00eda de los meses sucesivos. Con el pago de cada cuota pactada en el presente abonar\u00e1 el importe de PESOS '+toLetras(pm(D.qh))+' ('+fmtAR(pm(D.qh))+') en concepto de honorarios profesionales.');
+  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de COPIAP\u00d3 N\u00b0 235, LOCAL 5, PLANTA BAJA de la Ciudad de La Rioja, Provincia de La Rioja.');
+  b+=rP('En garant\u00eda del presente acuerdo, suscribo un pagar\u00e9 a la vista a favor de Castillo S.a.c.i.f.i.a. por el importe reconocido, el que me ser\u00e1 restituido una vez cancelada la forma de pago indicada en los puntos a) y b), m\u00e1s la presentaci\u00f3n de cada uno de los recibos emitidos a su favor.');
+  b+=rP('Para el caso que no abone en los plazos descriptos alguna de las cuotas pactadas, incurrir\u00e9 en mora de pleno derecho sin necesidad de interpelaci\u00f3n judicial o extrajudicial alguna y caer\u00e1n todos los plazos torn\u00e1ndose exigible la totalidad del capital no amortizado, como si la obligaci\u00f3n fuere de plazo vencido, con m\u00e1s los intereses compensatorios devengados desde la fecha de mora y hasta su efectivo pago. Asimismo, en caso de mora abonar\u00e9 un inter\u00e9s punitorio equivalente al 50% (cincuenta por ciento) de la tasa de inter\u00e9s compensatorio establecido, desde la fecha de mora y hasta su efectivo pago.');
+  b+=rP('En la ciudad de LA RIOJA, a los '+D.fd+' d\u00edas de '+D.fm+' de '+D.fa+', se firman dos ejemplares del presente, de plena conformidad.');
+  b+=rFirmas();
+  return wrapRTF(b);
+}
+
+function descargar(contenido,filename,linkId){
+  try{
+    const blob=new Blob([contenido],{type:'application/rtf;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=filename;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);document.body.removeChild(a);},800);
+    return true;
+  }catch(e){
+    try{const b64=btoa(unescape(encodeURIComponent(contenido)));const el=document.getElementById(linkId);el.href='data:application/rtf;base64,'+b64;el.download=filename;}catch(e2){}
+    return false;
+  }
+}
+
+function generar(p){
+  const errEl=document.getElementById('err-'+p);
+  const okEl=document.getElementById('ok-'+p);
+  const dlEl=document.getElementById('dl-'+p);
+  errEl.classList.remove('on');okEl.classList.remove('on');dlEl.classList.remove('on');
+  try{
+    let D,rtf,filename;
+    if(p==='t3'){
+      D={tn:g('t3_tn'),td:g('t3_td'),tin:g('t3_tin'),tid:g('t3_tid'),tic:g('t3_tic'),mc:g('t3_mc'),mh:g('t3_mh'),an:g('t3_an'),ah:g('t3_ah'),nc:g('t3_nc'),qm:g('t3_qm'),qh:g('t3_qh'),vc:fmtDate(g('t3_vc')),fd:g('t3_fd'),fm:g('t3_fm'),fa:g('t3_fa'),pct:pctVal.t3};
+      if([D.tn,D.td,D.tin,D.tid,D.tic,D.mc,D.an,D.ah,D.nc,D.qm,D.qh,D.vc,D.fd,D.fm,D.fa].some(v=>!v))throw new Error('Por favor, completá todos los campos obligatorios.');
+      if(pm(D.mc)<=0)throw new Error('El capital debe ser mayor a $0.');
+      rtf=docTerceros(D);filename='Reconocimiento_Terceros_'+D.tn.replace(/\s+/g,'_')+'.rtf';
+    }else{
+      D={tn:g('ti_tn'),td:g('ti_td'),tc:g('ti_tc'),mc:g('ti_mc'),mh:g('ti_mh'),an:g('ti_an'),ah:g('ti_ah'),nc:g('ti_nc'),qm:g('ti_qm'),qh:g('ti_qh'),vc:fmtDate(g('ti_vc')),fd:g('ti_fd'),fm:g('ti_fm'),fa:g('ti_fa'),pct:pctVal.ti};
+      if([D.tn,D.td,D.tc,D.mc,D.an,D.ah,D.nc,D.qm,D.qh,D.vc,D.fd,D.fm,D.fa].some(v=>!v))throw new Error('Por favor, completá todos los campos obligatorios.');
+      if(pm(D.mc)<=0)throw new Error('El capital debe ser mayor a $0.');
+      rtf=docTitular(D);filename='Reconocimiento_Titular_'+D.tn.replace(/\s+/g,'_')+'.rtf';
+    }
+    const ok=descargar(rtf,filename,'dl-'+p+'-a');
+    if(ok)okEl.classList.add('on');else dlEl.classList.add('on');
+  }catch(err){errEl.textContent=err.message;errEl.classList.add('on');}
+}
+</script>
+</body>
+</html>
