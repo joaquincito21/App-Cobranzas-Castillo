@@ -243,13 +243,13 @@ const RC={'á':"\\\'e1",'é':"\\\'e9",'í':"\\\'ed",'ó':"\\\'f3",'ú':"\\\'fa",
 function esc(s){let o='';for(const c of s){if(RC[c])o+=RC[c];else if(c.charCodeAt(0)>127)o+='\\u'+c.charCodeAt(0)+'?';else o+=c;}return o;}
 
 // rP: párrafo simple
-function rP(t,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||22);const sa='\\sa'+(o.sa!==undefined?o.sa:120);const bf=o.bold?'\\b ':'';const bfe=o.bold?'\\b0 ':'';return'{\\pard'+al+sa+'\\f0'+sz+' '+bf+esc(t)+bfe+'\\par}\n';}
+function rP(t,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||24);const sa='\\sa'+(o.sa!==undefined?o.sa:120);const bf=o.bold?'\\b ':'';const bfe=o.bold?'\\b0 ':'';return'{\\pard'+al+sa+'\\f0'+sz+' '+bf+esc(t)+bfe+'\\par}\n';}
 
 // rPM: párrafo con negritas selectivas — parts:[{t,bold}]
-function rPM(parts,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||22);const sa='\\sa'+(o.sa!==undefined?o.sa:120);let c='';for(const p of parts){if(p.bold)c+='{\\b '+esc(p.t)+'\\b0}';else c+=esc(p.t);}return'{\\pard'+al+sa+'\\f0'+sz+' '+c+'\\par}\n';}
+function rPM(parts,o){o=o||{};const al=o.center?'\\qc':'\\qj';const sz='\\fs'+(o.size||24);const sa='\\sa'+(o.sa!==undefined?o.sa:120);let c='';for(const p of parts){if(p.bold)c+='{\\b '+esc(p.t)+'\\b0}';else c+=esc(p.t);}return'{\\pard'+al+sa+'\\f0'+sz+' '+c+'\\par}\n';}
 
 function rFirmas(){return rP('')+rP('Firma:   _______________________',{sa:200})+rP('')+rP('Aclaración:   _______________________',{sa:200})+rP('')+rP('DNI:   _______________________',{sa:200});}
-function wrapRTF(b){return'{\\rtf1\\ansi\\ansicpg1252\\deff0\n{\\fonttbl{\\f0\\froman\\fcharset0 Arial;}}\n{\\colortbl;}\n\\widowctrl\\wpaper15840\\wpaperh12240\\margl1800\\margr1440\\margt1440\\margb1440\n'+b+'\n}';}
+function wrapRTF(b){return'{\\rtf1\\ansi\\ansicpg1252\\deff0\n{\\fonttbl{\\f0\\fswiss\\fcharset0 Arial;}}\n{\\colortbl;}\n\\widowctrl\\paperw11906\\paperh16838\\wpaper11906\\wpaperh16838\\margl720\\margr720\\margt720\\margb720\n'+b+'\n}';}
 
 // ══ TITULAR — negritas según doc PASTRAN ══
 // Bold: nombre+DNI, N°cuenta, Castillo S.A.C.I.F.I.A, monto total,
@@ -259,8 +259,8 @@ function docTitular(D){
   const pct=D.pct;
   const ct=parseInt(D.nc)===1?'cuota':'cuotas iguales, mensuales y consecutivas';
   let b='';
-  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:26,sa:40});
-  b+=rP('(TITULAR - SUCURSAL)',{center:true,bold:true,size:22,sa:200});
+  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:24,sa:40});
+  b+=rP('(TITULAR - SUCURSAL)',{center:true,bold:true,size:24,sa:200});
   b+=rPM([
     {t:D.tn+', DNI N\u00b0 '+D.td+',',bold:true},
     {t:' en mi car\u00e1cter de Titular de la cuenta N\u00b0 '},
@@ -291,7 +291,7 @@ function docTitular(D){
     {t:'PESOS '+toLetras(pm(D.qh))+' ('+fmtAR(pm(D.qh))+')',bold:true},
     {t:', correspondiente a honorarios profesionales.'},
   ]);
-  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de COPIAP\u00d3 N\u00b0 235, LOCAL 5, PLANTA BAJA de la Ciudad de La Rioja, Argentina.');
+  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de 8 DE DICIEMBRE N\u00ba 30, BARRIO CENTRO de la Ciudad de La Rioja, Argentina.');
   b+=rP('En garant\u00eda del presente acuerdo, suscribo un pagar\u00e9 a la vista a favor de Castillo S.a.c.i.f.i.a por el importe reconocido, el que me ser\u00e1 restituido una vez cancelada la forma de pago indicada en los puntos a) y b), m\u00e1s la presentaci\u00f3n de cada uno de los recibos emitidos a su favor.');
   b+=rP('Para el caso que no abone en los plazos descriptos alguna de las cuotas pactadas, incurrir\u00e9 en mora de pleno derecho sin necesidad de interpelaci\u00f3n judicial o extrajudicial alguna y caer\u00e1n todos los plazos torn\u00e1ndose exigible la totalidad del capital no amortizado, como si la obligaci\u00f3n fuere de plazo vencido, con m\u00e1s los intereses compensatorios devengados desde la fecha de mora y hasta su efectivo pago. Asimismo, en caso de mora abonar\u00e9 un inter\u00e9s punitorio equivalente al 50% (cincuenta por ciento) de la tasa de inter\u00e9s compensatorio establecido, desde la fecha de mora y hasta su efectivo pago.');
   b+=rPM([
@@ -309,8 +309,8 @@ function docTerceros(D){
   const total=pm(D.mc)+pm(D.mh);
   const ct=parseInt(D.nc)===1?'cuota':'cuotas iguales, mensuales y consecutivas';
   let b='';
-  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:26,sa:40});
-  b+=rP('(TERCEROS - SUCURSAL)',{center:true,bold:true,size:22,sa:200});
+  b+=rP('RECONOCIMIENTO DE DEUDA Y COMPROMISO DE PAGO',{center:true,bold:true,size:24,sa:40});
+  b+=rP('(TERCEROS - SUCURSAL)',{center:true,bold:true,size:24,sa:200});
   b+=rPM([
     {t:D.tn+', DNI '+D.td+',',bold:true},
     {t:' por la presente que me constituyo en garante liso y llano,\u00a0principal pagador, y deudor solidario,\u00a0sin beneficio de excusi\u00f3n\u00a0del Sr./a '+D.tin+' argentino/a,\u00a0mayor de edad, DNI N\u00b0 '+D.tid+' por las operaciones de cr\u00e9ditos realizadas en CASTILLO S.A.C.I.F.I.A., por\u00a0capital, con mas sus intereses,\u00a0gastos y/o cualquier otra causa derivada de la obligaci\u00f3n principal que se adeude a CASTILLO S.A.C.I.F.I.A.'},
@@ -320,7 +320,7 @@ function docTerceros(D){
   b+=rP('Me comprometo a abonar LA DEUDA de la siguiente manera:');
   b+=rP('Entrega en este acto en concepto de anticipo en el d\u00eda de la fecha la suma de Pesos '+toLetras(pm(D.an))+' ('+fmtAR(pm(D.an))+') a favor de CASTILLO S.A.C.I.F.I.A, m\u00e1s la suma de PESOS '+toLetras(pm(D.ah))+' ('+fmtAR(pm(D.ah))+') en concepto de honorarios profesionales.');
   b+=rP('El saldo deber\u00e1 abonarse en '+D.nc+' '+ct+' de Pesos '+toLetras(pm(D.qm))+' ('+fmtAR(pm(D.qm))+'), venciendo la primera de ellas el d\u00eda '+D.vc+' y las subsiguientes en igual d\u00eda de los meses sucesivos. Con el pago de cada cuota pactada en el presente abonar\u00e1 el importe de PESOS '+toLetras(pm(D.qh))+' ('+fmtAR(pm(D.qh))+') en concepto de honorarios profesionales.');
-  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de COPIAP\u00d3 N\u00b0 235, LOCAL 5, PLANTA BAJA de la Ciudad de La Rioja, Provincia de La Rioja.');
+  b+=rP('Cada una de las cuotas ser\u00e1n abonadas en el domicilio de 8 DE DICIEMBRE N\u00ba 30, BARRIO CENTRO de la Ciudad de La Rioja, Provincia de La Rioja.');
   b+=rP('En garant\u00eda del presente acuerdo, suscribo un pagar\u00e9 a la vista a favor de Castillo S.a.c.i.f.i.a. por el importe reconocido, el que me ser\u00e1 restituido una vez cancelada la forma de pago indicada en los puntos a) y b), m\u00e1s la presentaci\u00f3n de cada uno de los recibos emitidos a su favor.');
   b+=rP('Para el caso que no abone en los plazos descriptos alguna de las cuotas pactadas, incurrir\u00e9 en mora de pleno derecho sin necesidad de interpelaci\u00f3n judicial o extrajudicial alguna y caer\u00e1n todos los plazos torn\u00e1ndose exigible la totalidad del capital no amortizado, como si la obligaci\u00f3n fuere de plazo vencido, con m\u00e1s los intereses compensatorios devengados desde la fecha de mora y hasta su efectivo pago. Asimismo, en caso de mora abonar\u00e9 un inter\u00e9s punitorio equivalente al 50% (cincuenta por ciento) de la tasa de inter\u00e9s compensatorio establecido, desde la fecha de mora y hasta su efectivo pago.');
   b+=rP('En la ciudad de LA RIOJA, a los '+D.fd+' d\u00edas de '+D.fm+' de '+D.fa+', se firman dos ejemplares del presente, de plena conformidad.');
